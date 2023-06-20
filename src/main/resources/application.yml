@@ -1,0 +1,9 @@
+spring:
+    r2dbc:
+        url: r2dbc:postgresql://${DB_HOST:localhost}:5432/${DB_DATABASE:monkey}?schema=application
+        username: ${DB_USERNAME:postgres}
+        password: ${DB_PASSWORD:password}
+    flyway:
+        url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_DATABASE:monkey}?schema=application
+        user: ${DB_USERNAME:postgres}
+        password: ${DB_PASSWORD:password}
