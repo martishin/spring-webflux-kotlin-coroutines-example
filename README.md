@@ -1,4 +1,4 @@
-REST API service builded using:
+REST API service built using:
 * WebFlux
 * Kotlin with coroutines 
 * R2DBC with PostgreSQL 
