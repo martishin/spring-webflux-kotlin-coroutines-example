@@ -1,4 +1,4 @@
 REST API service built using:
-* WebFlux
+* Spring WebFlux
 * Kotlin with coroutines 
 * R2DBC with PostgreSQL 
