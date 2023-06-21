@@ -22,7 +22,7 @@ class SearchController(
 ) {
 
     @GetMapping
-    suspend fun searchByNames(
+    fun searchByNames(
         @RequestParam(name = "query") query: String,
     ): Flow<IdNameTypeResponse> {
         val usersFlow = userService.findAllUsersByNameLike(name = query)

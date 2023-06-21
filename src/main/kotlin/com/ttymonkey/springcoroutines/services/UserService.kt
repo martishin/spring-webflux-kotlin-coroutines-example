@@ -18,7 +18,7 @@ class UserService(
             ?.let { throw ResponseStatusException(HttpStatus.BAD_REQUEST, "The spcified emnail is already in use.") }
             ?: userRepository.save(user)
 
-    suspend fun findAllUsers(): Flow<User> =
+    fun findAllUsers(): Flow<User> =
         userRepository.findAll()
 
     suspend fun findUserById(id: Long): User? =
@@ -44,9 +44,9 @@ class UserService(
         }
     }
 
-    suspend fun findAllUsersByNameLike(name: String): Flow<User> =
+    fun findAllUsersByNameLike(name: String): Flow<User> =
         userRepository.findByNameContaining(name)
 
-    suspend fun findUsersByCompanyId(id: Long): Flow<User> =
+    fun findUsersByCompanyId(id: Long): Flow<User> =
         userRepository.findByCompanyId(id)
 }

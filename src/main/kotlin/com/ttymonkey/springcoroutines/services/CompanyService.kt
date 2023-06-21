@@ -15,7 +15,7 @@ class CompanyService(
     suspend fun saveCompany(company: Company): Company? =
         companyRepository.save(company)
 
-    suspend fun findAllCompanies(): Flow<Company> =
+    fun findAllCompanies(): Flow<Company> =
         companyRepository.findAll()
 
     suspend fun findCompanyById(id: Long): Company? =
@@ -31,7 +31,7 @@ class CompanyService(
         }
     }
 
-    suspend fun findAllCompaniesByNameLike(name: String): Flow<Company> =
+    fun findAllCompaniesByNameLike(name: String): Flow<Company> =
         companyRepository.findByNameContaining(name)
 
     suspend fun updateCompany(id: Long, requestedCompany: Company): Company {

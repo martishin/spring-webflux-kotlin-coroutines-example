@@ -33,7 +33,7 @@ class CompanyController(
             )
 
     @GetMapping
-    suspend fun findCompany(
+    fun findCompany(
         @RequestParam("name", required = false) name: String?,
     ): Flow<CompanyResponse> {
         val companies = name?.let { companyService.findAllCompaniesByNameLike(name) }

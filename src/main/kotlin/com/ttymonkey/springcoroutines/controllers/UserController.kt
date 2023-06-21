@@ -26,7 +26,7 @@ class UserController(
             ?: throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error during user creation.")
 
     @GetMapping
-    suspend fun findUsers(
+    fun findUsers(
         @RequestParam("name", required = false) name: String?,
     ): Flow<UserResponse> {
         val users = name?.let { userService.findAllUsersByNameLike(it) }
