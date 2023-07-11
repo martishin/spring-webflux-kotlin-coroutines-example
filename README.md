@@ -4,3 +4,4 @@ REST API service built using:
 * R2DBC with PostgreSQL
 * Flyway
 * Jooq
+* Docker
