@@ -3,3 +3,4 @@ REST API service built using:
 * Kotlin with coroutines 
 * R2DBC with PostgreSQL
 * Flyway
+* Jooq
