@@ -37,7 +37,7 @@ class UserController(
 
     @GetMapping("/{id}")
     suspend fun findUserById(
-        @PathVariable id: Long,
+        @PathVariable id: Int,
     ): UserResponse =
         userService.findUserById(id)
             ?.let(User::toResponse)
@@ -45,14 +45,14 @@ class UserController(
 
     @DeleteMapping("/{id}")
     suspend fun deleteUserById(
-        @PathVariable id: Long,
+        @PathVariable id: Int,
     ) {
         userService.deleteUserById(id)
     }
 
     @PutMapping("/{id}")
     suspend fun updateUser(
-        @PathVariable id: Long,
+        @PathVariable id: Int,
         @RequestBody userRequest: UserRequest,
     ): UserResponse =
         userService.updateUser(

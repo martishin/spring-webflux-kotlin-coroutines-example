@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
@@ -49,7 +50,7 @@ class CompanyController(
 
     @GetMapping("/{id}")
     suspend fun findCompanyById(
-        @PathVariable id: Long,
+        @PathVariable id: Int,
     ): CompanyResponse =
         companyService.findCompanyById(id)
             ?.let { company ->
@@ -61,14 +62,15 @@ class CompanyController(
 
     @DeleteMapping("/{id}")
     suspend fun deleteCompanyById(
-        @PathVariable id: Long,
-    ) {
+        @PathVariable id: Int,
+    ): ResponseEntity<Void> {
         companyService.deleteCompanyById(id)
+        return ResponseEntity.noContent().build()
     }
 
     @PutMapping("/{id}")
     suspend fun updateCompany(
-        @PathVariable id: Long,
+        @PathVariable id: Int,
         @RequestBody companyRequest: CompanyRequest,
     ): CompanyResponse =
         companyService.updateCompany(

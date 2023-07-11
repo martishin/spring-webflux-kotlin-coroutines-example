@@ -1,7 +1,7 @@
 package com.ttymonkey.springcoroutines.dto
 
 data class IdNameTypeResponse(
-    val id: Long,
+    val id: Int,
     val name: String,
     val type: ResultType,
 )

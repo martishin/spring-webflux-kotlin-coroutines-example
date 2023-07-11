@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.core.env.Environment
 
 @Configuration
-class FlywayConfiguration(private val env: Environment) {
+class FlywayConfig(private val env: Environment) {
 
     @Bean(initMethod = "migrate")
     fun flyway(): Flyway {

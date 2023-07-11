@@ -6,5 +6,5 @@ data class UserRequest(
     val email: String,
     val name: String,
     val age: Int,
-    @JsonProperty("company_id") val companyId: Long,
+    @JsonProperty("company_id") val companyId: Int,
 )

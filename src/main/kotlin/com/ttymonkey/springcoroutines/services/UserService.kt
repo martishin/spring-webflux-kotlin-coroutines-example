@@ -21,10 +21,10 @@ class UserService(
     fun findAllUsers(): Flow<User> =
         userRepository.findAll()
 
-    suspend fun findUserById(id: Long): User? =
+    suspend fun findUserById(id: Int): User? =
         userRepository.findById(id)
 
-    suspend fun deleteUserById(id: Long) {
+    suspend fun deleteUserById(id: Int) {
         val foundUser = userRepository.findById(id)
 
         if (foundUser == null) {
@@ -34,7 +34,7 @@ class UserService(
         }
     }
 
-    suspend fun updateUser(id: Long, requestedUser: User): User {
+    suspend fun updateUser(id: Int, requestedUser: User): User {
         val foundUser = userRepository.findById(id)
 
         return if (foundUser == null) {
@@ -47,6 +47,6 @@ class UserService(
     fun findAllUsersByNameLike(name: String): Flow<User> =
         userRepository.findByNameContaining(name)
 
-    fun findUsersByCompanyId(id: Long): Flow<User> =
+    fun findUsersByCompanyId(id: Int): Flow<User> =
         userRepository.findByCompanyId(id)
 }

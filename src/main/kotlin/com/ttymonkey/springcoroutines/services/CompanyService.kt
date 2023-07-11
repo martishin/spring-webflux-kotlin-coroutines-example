@@ -18,10 +18,10 @@ class CompanyService(
     fun findAllCompanies(): Flow<Company> =
         companyRepository.findAll()
 
-    suspend fun findCompanyById(id: Long): Company? =
+    suspend fun findCompanyById(id: Int): Company? =
         companyRepository.findById(id)
 
-    suspend fun deleteCompanyById(id: Long) {
+    suspend fun deleteCompanyById(id: Int) {
         val foundCompany = companyRepository.findById(id)
 
         if (foundCompany == null) {
@@ -34,7 +34,7 @@ class CompanyService(
     fun findAllCompaniesByNameLike(name: String): Flow<Company> =
         companyRepository.findByNameContaining(name)
 
-    suspend fun updateCompany(id: Long, requestedCompany: Company): Company {
+    suspend fun updateCompany(id: Int, requestedCompany: Company): Company {
         val foundCompany = companyRepository.findById(id)
 
         return if (foundCompany == null) {
@@ -42,7 +42,7 @@ class CompanyService(
         } else {
             companyRepository.save(
                 requestedCompany.copy(id = foundCompany.id),
-            )
+            )!!
         }
     }
 }

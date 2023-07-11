@@ -5,11 +5,11 @@ import kotlinx.coroutines.flow.Flow
 import org.springframework.data.r2dbc.repository.Query
 import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 
-interface UserRepository : CoroutineCrudRepository<User, Long> {
+interface UserRepository : CoroutineCrudRepository<User, Int> {
     fun findByNameContaining(name: String): Flow<User>
 
-    fun findByCompanyId(companyId: Long): Flow<User>
+    fun findByCompanyId(companyId: Int): Flow<User>
 
-    @Query("SELECT * FROM application.user WHERE email = :email")
+    @Query("SELECT * FROM application.users WHERE email = :email")
     fun findByEmail(email: String): Flow<User>
 }
