@@ -5,3 +5,5 @@ REST API service built using:
 * Flyway
 * Jooq
 * Docker
+
+[Posman Collection](https://drive.google.com/file/d/1An1NNcD7O01D-G3FRicwjqHlSPfbVv-P/view?usp=sharing)
