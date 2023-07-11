@@ -1,7 +1,8 @@
 REST API service built using:
+* Kotlin with coroutines
 * Spring WebFlux
-* Kotlin with coroutines 
-* R2DBC with PostgreSQL
+* PostgreSQL
+* Spring Data R2DBC
 * Flyway
 * Jooq
 * Transaction support
