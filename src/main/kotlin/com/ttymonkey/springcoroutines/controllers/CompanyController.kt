@@ -10,6 +10,7 @@ import com.ttymonkey.springcoroutines.toResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -21,6 +22,9 @@ class CompanyController(
     private val companyService: CompanyService,
     private val userService: UserService,
 ) {
+    companion object {
+        private val log = LoggerFactory.getLogger(CompanyService::class.java)
+    }
 
     @PostMapping
     suspend fun createCompany(@RequestBody companyRequest: CompanyRequest): CompanyResponse =
@@ -58,7 +62,10 @@ class CompanyController(
                     users = findCompanyUsers(company),
                 )
             }
-            ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company with id $id was not found.")
+            ?: run {
+                log.info("Company with id $id was not found.")
+                throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company with id $id was not found.")
+            }
 
     @DeleteMapping("/{id}")
     suspend fun deleteCompanyById(
