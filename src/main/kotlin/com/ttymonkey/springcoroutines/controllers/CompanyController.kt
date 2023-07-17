@@ -76,7 +76,7 @@ class CompanyController(
                         )
                     }
                     ?: run {
-                        log.info("Company with id $id was not found.")
+                        log.info("Company with id {} was not found.", id)
                         throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company with id $id was not found.")
                     }
             },
