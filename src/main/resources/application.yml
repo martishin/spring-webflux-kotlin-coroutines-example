@@ -7,3 +7,9 @@ spring:
         url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_DATABASE:monkey}?schema=application
         user: ${DB_USERNAME:postgres}
         password: ${DB_PASSWORD:password}
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,prometheus

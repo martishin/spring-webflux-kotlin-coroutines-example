@@ -3,17 +3,27 @@ package com.ttymonkey.springcoroutines.controllers
 import com.ttymonkey.springcoroutines.dto.CompanyRequest
 import com.ttymonkey.springcoroutines.dto.CompanyResponse
 import com.ttymonkey.springcoroutines.models.Company
+import com.ttymonkey.springcoroutines.monitoring.CoroutineMetric.coroutineMetrics
 import com.ttymonkey.springcoroutines.services.CompanyService
 import com.ttymonkey.springcoroutines.services.UserService
 import com.ttymonkey.springcoroutines.toModel
 import com.ttymonkey.springcoroutines.toResponse
+import io.micrometer.core.instrument.MeterRegistry
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.server.ResponseStatusException
 
 @RestController
@@ -21,6 +31,7 @@ import org.springframework.web.server.ResponseStatusException
 class CompanyController(
     private val companyService: CompanyService,
     private val userService: UserService,
+    private val meterRegistry: MeterRegistry,
 ) {
     companion object {
         private val log = LoggerFactory.getLogger(CompanyService::class.java)
@@ -56,16 +67,22 @@ class CompanyController(
     suspend fun findCompanyById(
         @PathVariable id: Int,
     ): CompanyResponse =
-        companyService.findCompanyById(id)
-            ?.let { company ->
-                company.toResponse(
-                    users = findCompanyUsers(company),
-                )
-            }
-            ?: run {
-                log.info("Company with id $id was not found.")
-                throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company with id $id was not found.")
-            }
+        coroutineMetrics(
+            suspendFunc = suspend {
+                companyService.findCompanyById(id)
+                    ?.let { company ->
+                        company.toResponse(
+                            users = findCompanyUsers(company),
+                        )
+                    }
+                    ?: run {
+                        log.info("Company with id $id was not found.")
+                        throw ResponseStatusException(HttpStatus.NOT_FOUND, "Company with id $id was not found.")
+                    }
+            },
+            functionName = "CompanyController.findCompanyById",
+            meterRegistry = meterRegistry,
+        )
 
     @DeleteMapping("/{id}")
     suspend fun deleteCompanyById(
