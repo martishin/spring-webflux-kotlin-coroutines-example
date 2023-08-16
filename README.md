@@ -11,4 +11,4 @@ REST API service built using:
 * Micrometer
 * Prometheus
 
-[Posman Collection](https://drive.google.com/file/d/1An1NNcD7O01D-G3FRicwjqHlSPfbVv-P/view?usp=sharing)
+[Postman Collection](https://drive.google.com/file/d/1An1NNcD7O01D-G3FRicwjqHlSPfbVv-P/view?usp=sharing)
