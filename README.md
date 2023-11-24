@@ -1,7 +1,7 @@
 # User Management Service
 REST API service used for users and companies management, along with their interconnections 
 
-## 🌐 Endpoints
+## 🔗 Endpoints
 [Online Postman collection](https://documenter.getpostman.com/view/19365947/2s9YeD7sov)
 
 ## 🚀 Running Locally
