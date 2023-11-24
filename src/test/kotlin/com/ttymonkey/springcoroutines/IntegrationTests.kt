@@ -52,7 +52,7 @@ class IntegrationTests(
 
     @AfterEach
     fun cleanup() {
-        databaseClient.sql("TRUNCATE TABLE companies")
+        databaseClient.sql("TRUNCATE TABLE companies;")
             .then()
             .subscribe()
     }

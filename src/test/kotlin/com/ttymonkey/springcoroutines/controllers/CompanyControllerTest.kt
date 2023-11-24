@@ -1,6 +1,7 @@
 package com.ttymonkey.springcoroutines.controllers
 
 import com.ninjasquad.springmockk.MockkBean
+import com.ttymonkey.springcoroutines.config.TestConfig
 import com.ttymonkey.springcoroutines.models.Company
 import com.ttymonkey.springcoroutines.services.CompanyService
 import com.ttymonkey.springcoroutines.services.UserService
@@ -11,10 +12,12 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.context.annotation.Import
 import java.util.UUID
 import kotlin.random.Random
 
 @WebFluxTest
+@Import(TestConfig::class)
 class CompanyControllerTest(@Autowired val webClient: WebTestClient) {
     @MockkBean
     private lateinit var companyService: CompanyService

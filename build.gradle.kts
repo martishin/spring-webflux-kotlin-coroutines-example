@@ -18,7 +18,7 @@ val flywayVersion = "8.5.11"
 val jooqVersion = "3.18.4"
 val mockkVersion = "1.13.5"
 val springmockkVersion = "4.0.2"
-val testcontainersVersion = "1.18.0"
+val testcontainersVersion = "1.19.3"
 
 repositories {
     mavenCentral()
